@@ -12,10 +12,17 @@ export function TodoInput(){
 
     const addTask = () => {
         console.log(input);
-        setTask([
-            ...task,
-            input
-        ]);
+        if(!input.trim()) return;
+
+        setTask(prev => 
+            [
+                ...prev,
+                {
+                    id: crypto.randomUUID(),
+                    task: input
+                }
+            ]
+        );
         setInput('');
     }
 
@@ -33,14 +40,14 @@ export function TodoInput(){
 
                 <button 
                     onClick={addTask}
-                    className="bg-black text-white ml-10 mr-30 p-2 w-20">
+                    className="bg-black text-white ml-10 mr-30 p-2 w-20 rounded-xl cursor-pointer">
                     Add
                 </button>
 
             </div>
 
             <div className="grid gap-y-4">
-                <TodoInputList task = {task} />
+                <TodoInputList task = {task} setTask={setTask} />
             </div>
         </>
     )
