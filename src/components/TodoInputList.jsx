@@ -12,14 +12,12 @@ export function TodoInputList({ task, setTask }){
     }
 
     const updateStatus = (event, id) => {
-        console.log(event.target.checked);
         
-            setTask( prev => 
-                prev.map(taskItem => 
-                    taskItem.id === id ? { ...taskItem, status: !taskItem.status } : taskItem
-                )
-            );
-        
+        setTask( prev => 
+            prev.map(taskItem => 
+                taskItem.id === id ? { ...taskItem, status: !taskItem.status } : taskItem
+            )
+        );
     }
 
     return(

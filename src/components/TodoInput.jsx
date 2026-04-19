@@ -1,10 +1,10 @@
 import { useState } from "react";
 import TodoInputList from './TodoInputList'
-
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export function TodoInput(){
     const [input, setInput] = useState("");
-    const [task, setTask] = useState([]);
+    const [task, setTask] = useLocalStorage("tasks", []);
 
     const getInput = (event) => {
         setInput(event.target.value);
