@@ -11,7 +11,6 @@ export function TodoInput(){
     }
 
     const addTask = () => {
-        console.log(input);
         if(!input.trim()) return;
 
         setTask(prev => 
@@ -19,12 +18,31 @@ export function TodoInput(){
                 ...prev,
                 {
                     id: crypto.randomUUID(),
-                    task: input
+                    task: input,
+                    status: false
                 }
             ]
         );
         setInput('');
-    }
+    };
+
+    const clickToAddTask = (event) => {
+        if(event.key === 'Enter'){
+            if(!input.trim()) return;
+
+            setTask(prev => 
+                [
+                    ...prev,
+                    {
+                        id: crypto.randomUUID(),
+                        task: input,
+                        status: false
+                    }
+                ]
+            );
+            setInput('');
+        }
+    };
 
     return(
         <>
@@ -35,7 +53,8 @@ export function TodoInput(){
                     placeholder="Enter your Task" 
                     value = {input}
                     onChange={getInput}
-                    className="flex-1 ml-30 border border-black p-2 w-120"
+                    onKeyDown={clickToAddTask}
+                    className="max-[599px] flex flex-1 max-w-2xl ml-25 border border-black p-3 rounded-xl"
                 />
 
                 <button 
@@ -46,7 +65,8 @@ export function TodoInput(){
 
             </div>
 
-            <div className="grid gap-y-4">
+            <div className="grid gap-x-4 gap-y-4 max-[1150px]:grid-cols-2 max-[599px]:grid-cols-1 min-[600px]:gap-y-12 min-[1000px]:grid-cols-3 
+            ml-5 mr-5">
                 <TodoInputList task = {task} setTask={setTask} />
             </div>
         </>
