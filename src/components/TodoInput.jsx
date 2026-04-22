@@ -46,7 +46,7 @@ export function TodoInput(){
 
     return(
         <>
-            <div className="flex items-center justify-center h-50">
+            <div className="flex items-center justify-center h-50 overflow-auto">
 
                 <input 
                     type="text" 
