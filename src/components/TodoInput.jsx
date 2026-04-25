@@ -1,10 +1,13 @@
 import { useState } from "react";
 import TodoInputList from './TodoInputList'
 import useLocalStorage from "../hooks/useLocalStorage";
+import useAutoScroll from "../hooks/useAutoScroll";
 
 export function TodoInput(){
     const [input, setInput] = useState("");
     const [task, setTask] = useLocalStorage("tasks", []);
+
+    const inputList = useAutoScroll(task);
 
     const getInput = (event) => {
         setInput(event.target.value);
@@ -65,8 +68,7 @@ export function TodoInput(){
 
             </div>
 
-            <div className="grid gap-x-4 gap-y-4 max-[1150px]:grid-cols-2 max-[599px]:grid-cols-1 min-[600px]:gap-y-12 min-[1000px]:grid-cols-3 
-            ml-5 mr-5">
+            <div ref={inputList} className="grid gap-x-4 gap-y-4 max-[1150px]:grid-cols-2 max-[599px]:grid-cols-1 min-[600px]:gap-y-12 min-[1000px]:grid-cols-3 ml-5 mr-5 overflow-y-auto scroll-smooth max-h-screen">
                 <TodoInputList task = {task} setTask={setTask} />
             </div>
         </>
